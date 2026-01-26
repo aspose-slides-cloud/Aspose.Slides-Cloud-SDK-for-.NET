@@ -87,24 +87,48 @@ namespace Aspose.Slides.Cloud.Sdk.Tests
         }
         
         [Test]
-        public void SetEmbeddedFontFromRequest()
+        public void SetEmbeddedFonts()
         {
             TestUtils.Upload(c_fileName, c_folderName + "/" + c_fileName);
-            Stream fontFile = File.OpenRead(Path.Combine(TestUtils.TestDataPath, c_fontFileName));
-            FontsData response = TestUtils.SlidesApi.SetEmbeddedFontFromRequest(fontFile, c_fileName, false, c_password, c_folderName);
+            List<string> fontsToEmbed = new List<string> { "Calibri" };
+            FontsData response = TestUtils.SlidesApi.SetEmbeddedFonts(c_fileName, null, fontsToEmbed, false, c_password, c_folderName);
             Assert.AreEqual(4, response.List.Count);
             Assert.IsFalse(response.List[0].IsEmbedded.HasValue);
             Assert.IsTrue(response.List[1].IsEmbedded.HasValue);
             Assert.AreEqual(c_fontNameCalibri, response.List[2].FontName);
             Assert.IsTrue(response.List[2].IsEmbedded.HasValue);
         }
-        
+
         [Test]
-        public void SetEmbeddedFontFromRequestOnline()
+        public void SetEmbeddedFontsFromRequest()
+        {
+            TestUtils.Upload(c_fileName, c_folderName + "/" + c_fileName);
+            Stream fontFile = File.OpenRead(Path.Combine(TestUtils.TestDataPath, c_fontFileName));
+            List<FileInfo> fontFiles = new List<FileInfo> { new FileInfo { Name = "calibri.ttf", Content = fontFile } };
+            FontsData response = TestUtils.SlidesApi.SetEmbeddedFonts(c_fileName, fontFiles, null, false, c_password, c_folderName);
+            Assert.AreEqual(4, response.List.Count);
+            Assert.IsFalse(response.List[0].IsEmbedded.HasValue);
+            Assert.IsTrue(response.List[1].IsEmbedded.HasValue);
+            Assert.AreEqual(c_fontNameCalibri, response.List[2].FontName);
+            Assert.IsTrue(response.List[2].IsEmbedded.HasValue);
+        }
+
+        [Test]
+        public void SetEmbeddedFontsOnline()
+        {
+            Stream file = File.OpenRead(Path.Combine(TestUtils.TestDataPath, c_fileName));
+            List<string> fontsToEmbed = new List<string> { "Calibri" };
+            Stream response = TestUtils.SlidesApi.SetEmbeddedFontsOnline(file, null, fontsToEmbed, false, c_password);
+            Assert.Greater(response.Length, file.Length);
+        }
+
+        [Test]
+        public void SetEmbeddedFontsFromRequestOnline()
         {
             Stream file = File.OpenRead(Path.Combine(TestUtils.TestDataPath, c_fileName));
             Stream fontFile = File.OpenRead(Path.Combine(TestUtils.TestDataPath, c_fontFileName));
-            Stream response = TestUtils.SlidesApi.SetEmbeddedFontFromRequestOnline(file, fontFile, false, c_password);
+            List<FileInfo> fontFiles = new List<FileInfo> { new FileInfo { Name = "calibri.ttf", Content = fontFile } };
+            Stream response = TestUtils.SlidesApi.SetEmbeddedFontsOnline(file, fontFiles, null, false, c_password);
             Assert.Greater(response.Length, file.Length);
         }
 

@@ -780,6 +780,11 @@ namespace Aspose.Slides.Cloud.Sdk.Model
         /// </summary>
         public int? Spokes { get; set; }
 
+        /// <summary>
+        /// The duration of the slide transition effect in milliseconds. If not set, the duration is determined automatically based on Speed and Type values.
+        /// </summary>
+        public int? Duration { get; set; }
+
 
         /// <summary>
         /// Property values to determine the type when deserializing from Json
@@ -836,6 +841,7 @@ namespace Aspose.Slides.Cloud.Sdk.Model
             sb.Append("  ShredPattern: ").Append(this.ShredPattern).Append("\n");
             sb.Append("  Orientation: ").Append(this.Orientation).Append("\n");
             sb.Append("  Spokes: ").Append(this.Spokes).Append("\n");
+            sb.Append("  Duration: ").Append(this.Duration).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }

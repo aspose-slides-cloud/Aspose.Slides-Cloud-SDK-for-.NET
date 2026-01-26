@@ -61,29 +61,29 @@ Caption 2 text.";
             TestUtils.Upload(c_fileName, c_folderName + "/" + c_fileName);
             ShapeBase dto = new VideoFrame { Base64Data = "bXAzc2FtcGxl" };
             TestUtils.SlidesApi.CreateShape(c_fileName, slideIndex, dto, password: c_password, folder: c_folderName);
-            CaptionTracks captions = TestUtils.SlidesApi.GetVideoCaptionTracks(
+            CaptionTracks captions = TestUtils.SlidesApi.GetCaptionTracks(
                 c_fileName, slideIndex, shapeIndex, null, c_password, c_folderName);
             Assert.AreEqual(0, captions.Items.Count);
 
-            TestUtils.SlidesApi.CreateVideoCaptionTrack(
+            TestUtils.SlidesApi.CreateCaptionTrack(
                 c_fileName, slideIndex, shapeIndex, track1Label, track1Data, c_password, c_folderName);
-            TestUtils.SlidesApi.CreateVideoCaptionTrack(
+            TestUtils.SlidesApi.CreateCaptionTrack(
                 c_fileName, slideIndex, shapeIndex, track2Label, track2Data, c_password, c_folderName);
-            captions = TestUtils.SlidesApi.GetVideoCaptionTracks(c_fileName, slideIndex, shapeIndex, true, c_password, c_folderName);
+            captions = TestUtils.SlidesApi.GetCaptionTracks(c_fileName, slideIndex, shapeIndex, true, c_password, c_folderName);
             Assert.AreEqual(2, captions.Items.Count);
             Assert.AreEqual(track1Label, captions.Items[0].Label);
             Assert.AreEqual(track1Data, captions.Items[0].DataAsString);
             Assert.AreEqual(track2Label, captions.Items[1].Label);
             Assert.AreEqual(track2Data, captions.Items[1].DataAsString);
 
-            TestUtils.SlidesApi.DeleteVideoCaptionTrack(c_fileName, slideIndex, shapeIndex, 1, c_password, c_folderName);
-            captions = TestUtils.SlidesApi.GetVideoCaptionTracks(c_fileName, slideIndex, shapeIndex, false, c_password, c_folderName);
+            TestUtils.SlidesApi.DeleteCaptionTrack(c_fileName, slideIndex, shapeIndex, 1, c_password, c_folderName);
+            captions = TestUtils.SlidesApi.GetCaptionTracks(c_fileName, slideIndex, shapeIndex, false, c_password, c_folderName);
             Assert.AreEqual(1, captions.Items.Count);
             Assert.AreEqual(track2Label, captions.Items[0].Label);
             Assert.AreEqual(null, captions.Items[0].DataAsString);
 
-            TestUtils.SlidesApi.DeleteVideoCaptionTracks(c_fileName, slideIndex, shapeIndex, c_password, c_folderName);
-            captions = TestUtils.SlidesApi.GetVideoCaptionTracks(c_fileName, slideIndex, shapeIndex, true, c_password, c_folderName);
+            TestUtils.SlidesApi.DeleteCaptionTracks(c_fileName, slideIndex, shapeIndex, c_password, c_folderName);
+            captions = TestUtils.SlidesApi.GetCaptionTracks(c_fileName, slideIndex, shapeIndex, true, c_password, c_folderName);
             Assert.AreEqual(0, captions.Items.Count);
         }
     }

@@ -50,8 +50,12 @@ namespace Aspose.Slides.Cloud.Sdk.Tests
         {
             TestUtils.Upload(c_fileName, c_folderName + "/" + c_fileName);
             Images images = TestUtils.SlidesApi.GetPresentationImages(c_fileName, c_password, c_folderName);
-            Images slideImages = TestUtils.SlidesApi.GetSlideImages(c_fileName, 1, c_password, c_folderName);
+            Images slideImages = TestUtils.SlidesApi.GetSlideImages(c_fileName, 1, null, null, c_password, c_folderName);
             Assert.Less(slideImages.List.Count, images.List.Count);
+            Images shapeImages = TestUtils.SlidesApi.GetSlideImages(c_fileName, 2, 2, null, c_password, c_folderName);
+            Assert.AreEqual(1, shapeImages.List.Count);
+            Images altImages = TestUtils.SlidesApi.GetSlideImages(c_fileName, 2, null, "title", c_password, c_folderName);
+            Assert.AreEqual(0, altImages.List.Count);
         }
 
         [Test]

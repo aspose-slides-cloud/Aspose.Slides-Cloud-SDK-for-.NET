@@ -465,6 +465,11 @@ namespace Aspose.Slides.Cloud.Sdk.Model
         public double? KerningMinimalSize { get; set; }
 
         /// <summary>
+        /// true to enable spell checking for the portion.
+        /// </summary>
+        public bool? SpellCheck { get; set; }
+
+        /// <summary>
         /// Proving language ID.
         /// </summary>
         public string LanguageId { get; set; }
@@ -575,6 +580,7 @@ namespace Aspose.Slides.Cloud.Sdk.Model
             sb.Append("  SmartTagClean: ").Append(this.SmartTagClean).Append("\n");
             sb.Append("  KerningMinimalSize: ").Append(this.KerningMinimalSize).Append("\n");
             sb.Append("  Kumimoji: ").Append(this.Kumimoji).Append("\n");
+            sb.Append("  SpellCheck: ").Append(this.SpellCheck).Append("\n");
             sb.Append("  LanguageId: ").Append(this.LanguageId).Append("\n");
             sb.Append("  AlternativeLanguageId: ").Append(this.AlternativeLanguageId).Append("\n");
             sb.Append("  IsHardUnderlineFill: ").Append(this.IsHardUnderlineFill).Append("\n");

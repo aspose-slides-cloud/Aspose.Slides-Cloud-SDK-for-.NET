@@ -514,6 +514,11 @@ namespace Aspose.Slides.Cloud.Sdk.Model
         /// </summary>
         public string ComplexScriptFont { get; set; }
 
+        /// <summary>
+        /// true to enable spell checking for the portion.
+        /// </summary>
+        public bool? SpellCheck { get; set; }
+
 
         /// <summary>
         /// Property values to determine the type when deserializing from Json
@@ -575,6 +580,7 @@ namespace Aspose.Slides.Cloud.Sdk.Model
             sb.Append("  LatinFont: ").Append(this.LatinFont).Append("\n");
             sb.Append("  EastAsianFont: ").Append(this.EastAsianFont).Append("\n");
             sb.Append("  ComplexScriptFont: ").Append(this.ComplexScriptFont).Append("\n");
+            sb.Append("  SpellCheck: ").Append(this.SpellCheck).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }

@@ -583,6 +583,45 @@ namespace Aspose.Slides.Cloud.Sdk
         }
 
         /// <summary>
+        /// Create video/audio captions track. 
+        /// </summary>
+        /// <param name="name">Document name.</param> 
+        /// <param name="slideIndex">Slide index.</param> 
+        /// <param name="shapeIndex">Shape index (must refer to a video or audio frame).</param> 
+        /// <param name="label">Caption track label.</param> 
+        /// <param name="data">Caption track data.</param> 
+        /// <param name="password">Document password.</param> 
+        /// <param name="folder">Document folder.</param> 
+        /// <param name="storage">Presentation storage.</param> 
+        /// <returns><see cref="CaptionTrack"/></returns>            
+        public CaptionTrack CreateCaptionTrack(string name, int slideIndex, int shapeIndex, string label, string data = null, string password = null, string folder = null, string storage = null)
+        {
+            // verify the required parameter 'name' is set
+            if (name == null)
+            {
+                throw new ApiException(400, "Missing required parameter 'name' when calling CreateCaptionTrack");
+            }
+            // verify the required parameter 'label' is set
+            if (label == null)
+            {
+                throw new ApiException(400, "Missing required parameter 'label' when calling CreateCaptionTrack");
+            }
+            // create path and map variables
+            string resourcePath = GetResourceUrl("/slides/{name}/slides/{slideIndex}/shapes/{shapeIndex}/captionTracks");
+            var headerParams = new Dictionary<string, string>();
+            resourcePath = UrlHelper.AddPathParameter(resourcePath, "name", name);
+            resourcePath = UrlHelper.AddPathParameter(resourcePath, "slideIndex", slideIndex);
+            resourcePath = UrlHelper.AddPathParameter(resourcePath, "shapeIndex", shapeIndex);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "label", label);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "folder", folder);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "storage", storage);
+            UrlHelper.AddHeaderParameter(headerParams, "password", password);
+            var postBody = SerializationHelper.Serialize(data); // http body (model) parameter
+            var requestFiles = new List<FileInfo>();
+            return InvokeApi<CaptionTrack>(resourcePath, "POST", postBody, headerParams, requestFiles, "application/json");
+        }
+
+        /// <summary>
         /// Add a new category to a chart. 
         /// </summary>
         /// <param name="name">Document name.</param> 
@@ -1625,45 +1664,6 @@ namespace Aspose.Slides.Cloud.Sdk
         }
 
         /// <summary>
-        /// Create video captions track. 
-        /// </summary>
-        /// <param name="name">Document name.</param> 
-        /// <param name="slideIndex">Slide index.</param> 
-        /// <param name="shapeIndex">Shape index (must refer to a picture frame).</param> 
-        /// <param name="label">Caption track label.</param> 
-        /// <param name="data">Caption track data.</param> 
-        /// <param name="password">Document password.</param> 
-        /// <param name="folder">Document folder.</param> 
-        /// <param name="storage">Presentation storage.</param> 
-        /// <returns><see cref="CaptionTrack"/></returns>            
-        public CaptionTrack CreateVideoCaptionTrack(string name, int slideIndex, int shapeIndex, string label, string data = null, string password = null, string folder = null, string storage = null)
-        {
-            // verify the required parameter 'name' is set
-            if (name == null)
-            {
-                throw new ApiException(400, "Missing required parameter 'name' when calling CreateVideoCaptionTrack");
-            }
-            // verify the required parameter 'label' is set
-            if (label == null)
-            {
-                throw new ApiException(400, "Missing required parameter 'label' when calling CreateVideoCaptionTrack");
-            }
-            // create path and map variables
-            string resourcePath = GetResourceUrl("/slides/{name}/slides/{slideIndex}/shapes/{shapeIndex}/captionTracks");
-            var headerParams = new Dictionary<string, string>();
-            resourcePath = UrlHelper.AddPathParameter(resourcePath, "name", name);
-            resourcePath = UrlHelper.AddPathParameter(resourcePath, "slideIndex", slideIndex);
-            resourcePath = UrlHelper.AddPathParameter(resourcePath, "shapeIndex", shapeIndex);
-            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "label", label);
-            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "folder", folder);
-            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "storage", storage);
-            UrlHelper.AddHeaderParameter(headerParams, "password", password);
-            var postBody = SerializationHelper.Serialize(data); // http body (model) parameter
-            var requestFiles = new List<FileInfo>();
-            return InvokeApi<CaptionTrack>(resourcePath, "POST", postBody, headerParams, requestFiles, "application/json");
-        }
-
-        /// <summary>
         /// Adds a text watermark to each slide of the presentation. Text watermark can be setup via method arguments or withing Shape DTO for detailed customization. Both options are applicable simultaneously.  
         /// </summary>
         /// <param name="name">Document name.</param> 
@@ -1937,6 +1937,68 @@ namespace Aspose.Slides.Cloud.Sdk
             UrlHelper.AddHeaderParameter(headerParams, "password", password);
             var requestFiles = new List<FileInfo>();
             return InvokeApi<SlideBackground>(resourcePath, "DELETE", null, headerParams, requestFiles, "application/json");
+        }
+
+        /// <summary>
+        /// Delete video/audio captions track. 
+        /// </summary>
+        /// <param name="name">Document name.</param> 
+        /// <param name="slideIndex">Slide index.</param> 
+        /// <param name="shapeIndex">Shape index (must refer to a video or audio frame).</param> 
+        /// <param name="captionsIndex">Captions track index.</param> 
+        /// <param name="password">Document password.</param> 
+        /// <param name="folder">Document folder.</param> 
+        /// <param name="storage">Presentation storage.</param> 
+        /// <returns><see cref=""/></returns>            
+        public void DeleteCaptionTrack(string name, int slideIndex, int shapeIndex, int captionsIndex, string password = null, string folder = null, string storage = null)
+        {
+            // verify the required parameter 'name' is set
+            if (name == null)
+            {
+                throw new ApiException(400, "Missing required parameter 'name' when calling DeleteCaptionTrack");
+            }
+            // create path and map variables
+            string resourcePath = GetResourceUrl("/slides/{name}/slides/{slideIndex}/shapes/{shapeIndex}/captionTracks/{captionsIndex}");
+            var headerParams = new Dictionary<string, string>();
+            resourcePath = UrlHelper.AddPathParameter(resourcePath, "name", name);
+            resourcePath = UrlHelper.AddPathParameter(resourcePath, "slideIndex", slideIndex);
+            resourcePath = UrlHelper.AddPathParameter(resourcePath, "shapeIndex", shapeIndex);
+            resourcePath = UrlHelper.AddPathParameter(resourcePath, "captionsIndex", captionsIndex);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "folder", folder);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "storage", storage);
+            UrlHelper.AddHeaderParameter(headerParams, "password", password);
+            var requestFiles = new List<FileInfo>();
+            InvokeVoidApi(resourcePath, "DELETE", null, headerParams, requestFiles, "application/json");
+        }
+
+        /// <summary>
+        /// Delete all video/audio captions tracks. 
+        /// </summary>
+        /// <param name="name">Document name.</param> 
+        /// <param name="slideIndex">Slide index.</param> 
+        /// <param name="shapeIndex">Shape index (must refer to a video frame).</param> 
+        /// <param name="password">Document password.</param> 
+        /// <param name="folder">Document folder.</param> 
+        /// <param name="storage">Presentation storage.</param> 
+        /// <returns><see cref=""/></returns>            
+        public void DeleteCaptionTracks(string name, int slideIndex, int shapeIndex, string password = null, string folder = null, string storage = null)
+        {
+            // verify the required parameter 'name' is set
+            if (name == null)
+            {
+                throw new ApiException(400, "Missing required parameter 'name' when calling DeleteCaptionTracks");
+            }
+            // create path and map variables
+            string resourcePath = GetResourceUrl("/slides/{name}/slides/{slideIndex}/shapes/{shapeIndex}/captionTracks");
+            var headerParams = new Dictionary<string, string>();
+            resourcePath = UrlHelper.AddPathParameter(resourcePath, "name", name);
+            resourcePath = UrlHelper.AddPathParameter(resourcePath, "slideIndex", slideIndex);
+            resourcePath = UrlHelper.AddPathParameter(resourcePath, "shapeIndex", shapeIndex);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "folder", folder);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "storage", storage);
+            UrlHelper.AddHeaderParameter(headerParams, "password", password);
+            var requestFiles = new List<FileInfo>();
+            InvokeVoidApi(resourcePath, "DELETE", null, headerParams, requestFiles, "application/json");
         }
 
         /// <summary>
@@ -3407,68 +3469,6 @@ namespace Aspose.Slides.Cloud.Sdk
         }
 
         /// <summary>
-        /// Delete video captions track. 
-        /// </summary>
-        /// <param name="name">Document name.</param> 
-        /// <param name="slideIndex">Slide index.</param> 
-        /// <param name="shapeIndex">Shape index (must refer to a video frame).</param> 
-        /// <param name="captionsIndex">Captions track index.</param> 
-        /// <param name="password">Document password.</param> 
-        /// <param name="folder">Document folder.</param> 
-        /// <param name="storage">Presentation storage.</param> 
-        /// <returns><see cref=""/></returns>            
-        public void DeleteVideoCaptionTrack(string name, int slideIndex, int shapeIndex, int captionsIndex, string password = null, string folder = null, string storage = null)
-        {
-            // verify the required parameter 'name' is set
-            if (name == null)
-            {
-                throw new ApiException(400, "Missing required parameter 'name' when calling DeleteVideoCaptionTrack");
-            }
-            // create path and map variables
-            string resourcePath = GetResourceUrl("/slides/{name}/slides/{slideIndex}/shapes/{shapeIndex}/captionTracks/{captionsIndex}");
-            var headerParams = new Dictionary<string, string>();
-            resourcePath = UrlHelper.AddPathParameter(resourcePath, "name", name);
-            resourcePath = UrlHelper.AddPathParameter(resourcePath, "slideIndex", slideIndex);
-            resourcePath = UrlHelper.AddPathParameter(resourcePath, "shapeIndex", shapeIndex);
-            resourcePath = UrlHelper.AddPathParameter(resourcePath, "captionsIndex", captionsIndex);
-            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "folder", folder);
-            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "storage", storage);
-            UrlHelper.AddHeaderParameter(headerParams, "password", password);
-            var requestFiles = new List<FileInfo>();
-            InvokeVoidApi(resourcePath, "DELETE", null, headerParams, requestFiles, "application/json");
-        }
-
-        /// <summary>
-        /// Delete all video captions tracks. 
-        /// </summary>
-        /// <param name="name">Document name.</param> 
-        /// <param name="slideIndex">Slide index.</param> 
-        /// <param name="shapeIndex">Shape index (must refer to a video frame).</param> 
-        /// <param name="password">Document password.</param> 
-        /// <param name="folder">Document folder.</param> 
-        /// <param name="storage">Presentation storage.</param> 
-        /// <returns><see cref=""/></returns>            
-        public void DeleteVideoCaptionTracks(string name, int slideIndex, int shapeIndex, string password = null, string folder = null, string storage = null)
-        {
-            // verify the required parameter 'name' is set
-            if (name == null)
-            {
-                throw new ApiException(400, "Missing required parameter 'name' when calling DeleteVideoCaptionTracks");
-            }
-            // create path and map variables
-            string resourcePath = GetResourceUrl("/slides/{name}/slides/{slideIndex}/shapes/{shapeIndex}/captionTracks");
-            var headerParams = new Dictionary<string, string>();
-            resourcePath = UrlHelper.AddPathParameter(resourcePath, "name", name);
-            resourcePath = UrlHelper.AddPathParameter(resourcePath, "slideIndex", slideIndex);
-            resourcePath = UrlHelper.AddPathParameter(resourcePath, "shapeIndex", shapeIndex);
-            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "folder", folder);
-            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "storage", storage);
-            UrlHelper.AddHeaderParameter(headerParams, "password", password);
-            var requestFiles = new List<FileInfo>();
-            InvokeVoidApi(resourcePath, "DELETE", null, headerParams, requestFiles, "application/json");
-        }
-
-        /// <summary>
         /// Removes shapes with name \&quot;watermark\&quot; from the presentation. 
         /// </summary>
         /// <param name="name">Document name.</param> 
@@ -4240,6 +4240,38 @@ namespace Aspose.Slides.Cloud.Sdk
             UrlHelper.AddHeaderParameter(headerParams, "password", password);
             var requestFiles = new List<FileInfo>();
             return InvokeApi<SlideBackground>(resourcePath, "GET", null, headerParams, requestFiles, "application/json");
+        }
+
+        /// <summary>
+        /// Gets video/audio captions tracks. 
+        /// </summary>
+        /// <param name="name">Document name.</param> 
+        /// <param name="slideIndex">Slide index.</param> 
+        /// <param name="shapeIndex">Shape index (must refer to a video or audio frame).</param> 
+        /// <param name="includeData">true to include caption data string values in the response.</param> 
+        /// <param name="password">Document password.</param> 
+        /// <param name="folder">Document folder.</param> 
+        /// <param name="storage">Presentation storage.</param> 
+        /// <returns><see cref="CaptionTracks"/></returns>            
+        public CaptionTracks GetCaptionTracks(string name, int slideIndex, int shapeIndex, bool? includeData = null, string password = null, string folder = null, string storage = null)
+        {
+            // verify the required parameter 'name' is set
+            if (name == null)
+            {
+                throw new ApiException(400, "Missing required parameter 'name' when calling GetCaptionTracks");
+            }
+            // create path and map variables
+            string resourcePath = GetResourceUrl("/slides/{name}/slides/{slideIndex}/shapes/{shapeIndex}/captionTracks");
+            var headerParams = new Dictionary<string, string>();
+            resourcePath = UrlHelper.AddPathParameter(resourcePath, "name", name);
+            resourcePath = UrlHelper.AddPathParameter(resourcePath, "slideIndex", slideIndex);
+            resourcePath = UrlHelper.AddPathParameter(resourcePath, "shapeIndex", shapeIndex);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "includeData", includeData);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "folder", folder);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "storage", storage);
+            UrlHelper.AddHeaderParameter(headerParams, "password", password);
+            var requestFiles = new List<FileInfo>();
+            return InvokeApi<CaptionTracks>(resourcePath, "GET", null, headerParams, requestFiles, "application/json");
         }
 
         /// <summary>
@@ -5368,11 +5400,13 @@ namespace Aspose.Slides.Cloud.Sdk
         /// </summary>
         /// <param name="name">Document name.</param> 
         /// <param name="slideIndex">Slide index.</param> 
+        /// <param name="shapeIndex">Shape index (null to search all shapes).</param> 
+        /// <param name="shapeAltText">Shape alt name (null to search all shapes).</param> 
         /// <param name="password">Document password.</param> 
         /// <param name="folder">Document folder.</param> 
         /// <param name="storage">Document storage.</param> 
         /// <returns><see cref="Images"/></returns>            
-        public Images GetSlideImages(string name, int slideIndex, string password = null, string folder = null, string storage = null)
+        public Images GetSlideImages(string name, int slideIndex, int? shapeIndex = null, string shapeAltText = null, string password = null, string folder = null, string storage = null)
         {
             // verify the required parameter 'name' is set
             if (name == null)
@@ -5384,6 +5418,8 @@ namespace Aspose.Slides.Cloud.Sdk
             var headerParams = new Dictionary<string, string>();
             resourcePath = UrlHelper.AddPathParameter(resourcePath, "name", name);
             resourcePath = UrlHelper.AddPathParameter(resourcePath, "slideIndex", slideIndex);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "shapeIndex", shapeIndex);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "shapeAltText", shapeAltText);
             resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "folder", folder);
             resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "storage", storage);
             UrlHelper.AddHeaderParameter(headerParams, "password", password);
@@ -5967,38 +6003,6 @@ namespace Aspose.Slides.Cloud.Sdk
             UrlHelper.AddHeaderParameter(headerParams, "password", password);
             var requestFiles = new List<FileInfo>();
             return InvokeApi<VbaProject>(resourcePath, "GET", null, headerParams, requestFiles, "application/json");
-        }
-
-        /// <summary>
-        /// Gets video captions tracks. 
-        /// </summary>
-        /// <param name="name">Document name.</param> 
-        /// <param name="slideIndex">Slide index.</param> 
-        /// <param name="shapeIndex">Shape index (must refer to a picture frame).</param> 
-        /// <param name="includeData">true to include caption data string values in the response.</param> 
-        /// <param name="password">Document password.</param> 
-        /// <param name="folder">Document folder.</param> 
-        /// <param name="storage">Presentation storage.</param> 
-        /// <returns><see cref="CaptionTracks"/></returns>            
-        public CaptionTracks GetVideoCaptionTracks(string name, int slideIndex, int shapeIndex, bool? includeData = null, string password = null, string folder = null, string storage = null)
-        {
-            // verify the required parameter 'name' is set
-            if (name == null)
-            {
-                throw new ApiException(400, "Missing required parameter 'name' when calling GetVideoCaptionTracks");
-            }
-            // create path and map variables
-            string resourcePath = GetResourceUrl("/slides/{name}/slides/{slideIndex}/shapes/{shapeIndex}/captionTracks");
-            var headerParams = new Dictionary<string, string>();
-            resourcePath = UrlHelper.AddPathParameter(resourcePath, "name", name);
-            resourcePath = UrlHelper.AddPathParameter(resourcePath, "slideIndex", slideIndex);
-            resourcePath = UrlHelper.AddPathParameter(resourcePath, "shapeIndex", shapeIndex);
-            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "includeData", includeData);
-            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "folder", folder);
-            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "storage", storage);
-            UrlHelper.AddHeaderParameter(headerParams, "password", password);
-            var requestFiles = new List<FileInfo>();
-            return InvokeApi<CaptionTracks>(resourcePath, "GET", null, headerParams, requestFiles, "application/json");
         }
 
         /// <summary>
@@ -7949,84 +7953,6 @@ namespace Aspose.Slides.Cloud.Sdk
         }
 
         /// <summary>
-        /// Embeds font from request and returns presentation fonts info. 
-        /// </summary>
-        /// <param name="font">Font data.</param> 
-        /// <param name="name">Document name.</param> 
-        /// <param name="onlyUsed">Only used characters will be embedded.</param> 
-        /// <param name="password">Document password.</param> 
-        /// <param name="folder">Document folder.</param> 
-        /// <param name="storage">Document storage.</param> 
-        /// <returns><see cref="FontsData"/></returns>            
-        public FontsData SetEmbeddedFontFromRequest(System.IO.Stream font, string name, bool? onlyUsed = null, string password = null, string folder = null, string storage = null)
-        {
-            // verify the required parameter 'font' is set
-            if (font == null)
-            {
-                throw new ApiException(400, "Missing required parameter 'font' when calling SetEmbeddedFontFromRequest");
-            }
-            // verify the required parameter 'name' is set
-            if (name == null)
-            {
-                throw new ApiException(400, "Missing required parameter 'name' when calling SetEmbeddedFontFromRequest");
-            }
-            // create path and map variables
-            string resourcePath = GetResourceUrl("/slides/{name}/fonts/embedded");
-            var headerParams = new Dictionary<string, string>();
-            var formParams = new Dictionary<string, object>();
-            resourcePath = UrlHelper.AddPathParameter(resourcePath, "name", name);
-            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "onlyUsed", onlyUsed);
-            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "folder", folder);
-            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "storage", storage);
-            UrlHelper.AddHeaderParameter(headerParams, "password", password);
-            var requestFiles = new List<FileInfo>();
-            if (font != null) 
-            {
-                requestFiles.Add(new FileInfo { Name = "font", Content = font });
-            }
-            return InvokeApi<FontsData>(resourcePath, "POST", null, headerParams, requestFiles, "application/json");
-        }
-
-        /// <summary>
-        /// Embeds font from request and returns presentation. 
-        /// </summary>
-        /// <param name="document">Document data.</param> 
-        /// <param name="font">Font data.</param> 
-        /// <param name="onlyUsed">Only used characters will be embedded.</param> 
-        /// <param name="password">Document password.</param> 
-        /// <returns><see cref="System.IO.Stream"/></returns>            
-        public System.IO.Stream SetEmbeddedFontFromRequestOnline(System.IO.Stream document, System.IO.Stream font, bool? onlyUsed = null, string password = null)
-        {
-            // verify the required parameter 'document' is set
-            if (document == null)
-            {
-                throw new ApiException(400, "Missing required parameter 'document' when calling SetEmbeddedFontFromRequestOnline");
-            }
-            // verify the required parameter 'font' is set
-            if (font == null)
-            {
-                throw new ApiException(400, "Missing required parameter 'font' when calling SetEmbeddedFontFromRequestOnline");
-            }
-            // create path and map variables
-            string resourcePath = GetResourceUrl("/slides/fonts/embedded");
-            var headerParams = new Dictionary<string, string>();
-            var formParams = new Dictionary<string, object>();
-            
-            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "onlyUsed", onlyUsed);
-            UrlHelper.AddHeaderParameter(headerParams, "password", password);
-            var requestFiles = new List<FileInfo>();
-            if (document != null) 
-            {
-                requestFiles.Add(new FileInfo { Name = "document", Content = document });
-            }
-            if (font != null) 
-            {
-                requestFiles.Add(new FileInfo { Name = "font", Content = font });
-            }
-            return InvokeBinaryApi(resourcePath, "POST", null, headerParams, requestFiles, "application/json");
-        }
-
-        /// <summary>
         /// Embeds specified font and returns presentation. 
         /// </summary>
         /// <param name="document">Document data.</param> 
@@ -8059,6 +7985,78 @@ namespace Aspose.Slides.Cloud.Sdk
             if (document != null) 
             {
                 requestFiles.Add(new FileInfo { Name = "document", Content = document });
+            }
+            return InvokeBinaryApi(resourcePath, "POST", null, headerParams, requestFiles, "application/json");
+        }
+
+        /// <summary>
+        /// Embeds fonts with specified names and/or fonts from request and returns presentation fonts info. 
+        /// </summary>
+        /// <param name="name">Document name.</param> 
+        /// <param name="fonts">Font data.</param> 
+        /// <param name="fontNames">Font names.</param> 
+        /// <param name="onlyUsed">Only used characters will be embedded.</param> 
+        /// <param name="password">Document password.</param> 
+        /// <param name="folder">Document folder.</param> 
+        /// <param name="storage">Document storage.</param> 
+        /// <returns><see cref="FontsData"/></returns>            
+        public FontsData SetEmbeddedFonts(string name, List<FileInfo> fonts = null, List<string> fontNames = null, bool? onlyUsed = null, string password = null, string folder = null, string storage = null)
+        {
+            // verify the required parameter 'name' is set
+            if (name == null)
+            {
+                throw new ApiException(400, "Missing required parameter 'name' when calling SetEmbeddedFonts");
+            }
+            // create path and map variables
+            string resourcePath = GetResourceUrl("/slides/{name}/fonts/embedded");
+            var headerParams = new Dictionary<string, string>();
+            var formParams = new Dictionary<string, object>();
+            resourcePath = UrlHelper.AddPathParameter(resourcePath, "name", name);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "fontNames", fontNames);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "onlyUsed", onlyUsed);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "folder", folder);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "storage", storage);
+            UrlHelper.AddHeaderParameter(headerParams, "password", password);
+            var requestFiles = new List<FileInfo>();
+            if (fonts != null) 
+            {
+                requestFiles.AddRange(fonts);
+            }
+            return InvokeApi<FontsData>(resourcePath, "POST", null, headerParams, requestFiles, "application/json");
+        }
+
+        /// <summary>
+        /// Embeds font from request and returns presentation. 
+        /// </summary>
+        /// <param name="document">Document data.</param> 
+        /// <param name="fonts">Font data.</param> 
+        /// <param name="fontNames">Font names.</param> 
+        /// <param name="onlyUsed">Only used characters will be embedded.</param> 
+        /// <param name="password">Document password.</param> 
+        /// <returns><see cref="System.IO.Stream"/></returns>            
+        public System.IO.Stream SetEmbeddedFontsOnline(System.IO.Stream document, List<FileInfo> fonts = null, List<string> fontNames = null, bool? onlyUsed = null, string password = null)
+        {
+            // verify the required parameter 'document' is set
+            if (document == null)
+            {
+                throw new ApiException(400, "Missing required parameter 'document' when calling SetEmbeddedFontsOnline");
+            }
+            // create path and map variables
+            string resourcePath = GetResourceUrl("/slides/fonts/embedded");
+            var headerParams = new Dictionary<string, string>();
+            var formParams = new Dictionary<string, object>();
+            
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "fontNames", fontNames);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "onlyUsed", onlyUsed);
+            UrlHelper.AddHeaderParameter(headerParams, "password", password);
+            var requestFiles = new List<FileInfo>();
+            if (document != null) 
+            {
+                requestFiles.Add(new FileInfo { Name = "document", Content = document });
+            }
+            if (fonts != null) 
+            {
+                requestFiles.AddRange(fonts);
             }
             return InvokeBinaryApi(resourcePath, "POST", null, headerParams, requestFiles, "application/json");
         }

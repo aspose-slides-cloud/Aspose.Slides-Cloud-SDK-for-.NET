@@ -139,7 +139,12 @@ namespace Aspose.Slides.Cloud.Sdk.Model
             /// <summary>
             /// Enum SuperscriptElement for "SuperscriptElement"
             /// </summary>
-            SuperscriptElement
+            SuperscriptElement,
+            
+            /// <summary>
+            /// Enum Phantom for "Phantom"
+            /// </summary>
+            Phantom
         }
 
         /// <summary>
