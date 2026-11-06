@@ -27,6 +27,7 @@ using Aspose.Slides.Cloud.Sdk.Model;
 using Aspose.Slides.Cloud.Sdk.Tests.Utils;
 using NUnit.Framework;
 using System.Collections.Generic;
+using System.IO;
 
 namespace Aspose.Slides.Cloud.Sdk.Tests
 {
@@ -747,6 +748,31 @@ namespace Aspose.Slides.Cloud.Sdk.Tests
             Assert.AreEqual(90, (chart.Series[0] as OneValueSeries).DataPoints[2].Value);
         }
 
+        [Test]
+        public void ImportChartFromWorkbook()
+        {
+            TestUtils.Upload(c_fileName, c_folderName + "/" + c_fileName);
+            Stream file = File.OpenRead(Path.Combine(TestUtils.TestDataPath, c_workbookFileName));
+            ShapeBase shape = TestUtils.SlidesApi.ImportChartFromWorkbook(
+                c_fileName, c_slideIndex, c_worksheetName, file, chartIndex: 1,
+                password: c_password, folder: c_folderName);
+            Assert.IsNotNull(shape);
+            Assert.IsInstanceOf<Chart>(shape);
+        }
+
+        [Test]
+        public void ImportChartFromWorkbookByPath()
+        {
+            TestUtils.Upload(c_fileName, c_folderName + "/" + c_fileName);
+            TestUtils.Upload(c_workbookFileName, c_folderName + "/" + c_workbookFileName);
+            ShapeBase shape = TestUtils.SlidesApi.ImportChartFromWorkbook(
+                c_fileName, c_slideIndex, c_worksheetName, chartIndex: 1,
+                workbookPath: c_folderName + "/" + c_workbookFileName,
+                password: c_password, folder: c_folderName);
+            Assert.IsNotNull(shape);
+            Assert.IsInstanceOf<Chart>(shape);
+        }
+
         const string c_fillColor = "#77CEF9";
         const string c_lineColor = "#E85052";
         const int c_slideIndex = 3;
@@ -757,5 +783,7 @@ namespace Aspose.Slides.Cloud.Sdk.Tests
         const int c_seriesCount = 3;
         const int c_categoryCount = 4;
         const int c_seriesGroupIndex = 1;
+        const string c_workbookFileName = "oleObject.xlsx";
+        const string c_worksheetName = "Sheet1";
     }
 }

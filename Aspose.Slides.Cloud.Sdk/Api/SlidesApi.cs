@@ -1168,13 +1168,14 @@ namespace Aspose.Slides.Cloud.Sdk
         /// <param name="slideIndex">Slide index.</param> 
         /// <param name="dto">Shape DTO.</param> 
         /// <param name="shapeToClone">Optional index for clone shape instead of adding a new one.</param> 
+        /// <param name="cloneFromSlide">Optional index of the slide to clone the shape from. When set, shapeToClone refers to a shape on that slide.</param> 
         /// <param name="position">Position of the new shape in the list. Default is at the end of the list.</param> 
         /// <param name="password">Document password.</param> 
         /// <param name="folder">Document folder.</param> 
         /// <param name="storage">Document storage.</param> 
         /// <param name="subShape">Sub-shape path (e.g. \"3\", \"3/shapes/2).</param> 
         /// <returns><see cref="ShapeBase"/></returns>            
-        public ShapeBase CreateShape(string name, int slideIndex, ShapeBase dto = null, int? shapeToClone = null, int? position = null, string password = null, string folder = null, string storage = null, string subShape = null)
+        public ShapeBase CreateShape(string name, int slideIndex, ShapeBase dto = null, int? shapeToClone = null, int? cloneFromSlide = null, int? position = null, string password = null, string folder = null, string storage = null, string subShape = null)
         {
             // verify the required parameter 'name' is set
             if (name == null)
@@ -1187,6 +1188,7 @@ namespace Aspose.Slides.Cloud.Sdk
             resourcePath = UrlHelper.AddPathParameter(resourcePath, "name", name);
             resourcePath = UrlHelper.AddPathParameter(resourcePath, "slideIndex", slideIndex);
             resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "shapeToClone", shapeToClone);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "cloneFromSlide", cloneFromSlide);
             resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "position", position);
             resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "folder", folder);
             resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "storage", storage);
@@ -1472,13 +1474,14 @@ namespace Aspose.Slides.Cloud.Sdk
         /// <param name="slideType">Slide type (master, layout or notes).</param> 
         /// <param name="dto">Shape DTO.</param> 
         /// <param name="shapeToClone">Optional index for clone shape instead of adding a new one.</param> 
+        /// <param name="cloneFromSlide">Optional index of the slide to clone the shape from. When set, shapeToClone refers to a shape on that slide.</param> 
         /// <param name="position">Position of the new shape in the list. Default is at the end of the list.</param> 
         /// <param name="password">Document password.</param> 
         /// <param name="folder">Document folder.</param> 
         /// <param name="storage">Document storage.</param> 
         /// <param name="subShape">Sub-shape path (e.g. \"3\", \"3/shapes/2).</param> 
         /// <returns><see cref="ShapeBase"/></returns>            
-        public ShapeBase CreateSpecialSlideShape(string name, int slideIndex, SpecialSlideType slideType, ShapeBase dto, int? shapeToClone = null, int? position = null, string password = null, string folder = null, string storage = null, string subShape = null)
+        public ShapeBase CreateSpecialSlideShape(string name, int slideIndex, SpecialSlideType slideType, ShapeBase dto, int? shapeToClone = null, int? cloneFromSlide = null, int? position = null, string password = null, string folder = null, string storage = null, string subShape = null)
         {
             // verify the required parameter 'name' is set
             if (name == null)
@@ -1497,6 +1500,7 @@ namespace Aspose.Slides.Cloud.Sdk
             resourcePath = UrlHelper.AddPathParameter(resourcePath, "slideIndex", slideIndex);
             resourcePath = UrlHelper.AddPathParameter(resourcePath, "slideType", slideType);
             resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "shapeToClone", shapeToClone);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "cloneFromSlide", cloneFromSlide);
             resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "position", position);
             resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "folder", folder);
             resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "storage", storage);
@@ -3888,6 +3892,50 @@ namespace Aspose.Slides.Cloud.Sdk
         }
 
         /// <summary>
+        /// Render paragraph to specified picture format. 
+        /// </summary>
+        /// <param name="name">Presentation name.</param> 
+        /// <param name="slideIndex">Slide index.</param> 
+        /// <param name="shapeIndex">Index of shape starting from 1</param> 
+        /// <param name="paragraphIndex">Paragraph index.</param> 
+        /// <param name="format">Export picture format.</param> 
+        /// <param name="scaleX">X scale ratio.</param> 
+        /// <param name="scaleY">Y scale ratio.</param> 
+        /// <param name="quality">Image quality (1 to 100); applies to JPEG only.</param> 
+        /// <param name="password">Document password.</param> 
+        /// <param name="folder">Presentation folder.</param> 
+        /// <param name="storage">Presentation storage.</param> 
+        /// <param name="fontsFolder">Fonts folder.</param> 
+        /// <param name="subShape">Sub-shape path (e.g. \"3\", \"3/shapes/2).</param> 
+        /// <returns><see cref="System.IO.Stream"/></returns>            
+        public System.IO.Stream DownloadParagraph(string name, int slideIndex, int shapeIndex, int paragraphIndex, ImageExportFormat format, double? scaleX = null, double? scaleY = null, int? quality = null, string password = null, string folder = null, string storage = null, string fontsFolder = null, string subShape = null)
+        {
+            // verify the required parameter 'name' is set
+            if (name == null)
+            {
+                throw new ApiException(400, "Missing required parameter 'name' when calling DownloadParagraph");
+            }
+            // create path and map variables
+            string resourcePath = GetResourceUrl("/slides/{name}/slides/{slideIndex}/shapes/{shapeIndex}/paragraphs/{paragraphIndex}/{format}");
+            var headerParams = new Dictionary<string, string>();
+            resourcePath = UrlHelper.AddPathParameter(resourcePath, "name", name);
+            resourcePath = UrlHelper.AddPathParameter(resourcePath, "slideIndex", slideIndex);
+            resourcePath = UrlHelper.AddPathParameter(resourcePath, "shapeIndex", shapeIndex);
+            resourcePath = UrlHelper.AddPathParameter(resourcePath, "paragraphIndex", paragraphIndex);
+            resourcePath = UrlHelper.AddPathParameter(resourcePath, "format", format);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "scaleX", scaleX);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "scaleY", scaleY);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "quality", quality);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "folder", folder);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "storage", storage);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "fontsFolder", fontsFolder);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "subShape", subShape);
+            UrlHelper.AddHeaderParameter(headerParams, "password", password);
+            var requestFiles = new List<FileInfo>();
+            return InvokeBinaryApi(resourcePath, "POST", null, headerParams, requestFiles, "application/json");
+        }
+
+        /// <summary>
         /// Save a presentation to a specified format. 
         /// </summary>
         /// <param name="name">Document name.</param> 
@@ -4152,6 +4200,52 @@ namespace Aspose.Slides.Cloud.Sdk
             var postBody = SerializationHelper.Serialize(options); // http body (model) parameter
             var requestFiles = new List<FileInfo>();
             return InvokeBinaryApi(resourcePath, "POST", postBody, headerParams, requestFiles, "application/json");
+        }
+
+        /// <summary>
+        /// Render table cell paragraph to specified picture format. 
+        /// </summary>
+        /// <param name="name">Document name.</param> 
+        /// <param name="slideIndex">Slide index.</param> 
+        /// <param name="shapeIndex">Shape index.</param> 
+        /// <param name="rowIndex">Row index.</param> 
+        /// <param name="cellIndex">Table cell index.</param> 
+        /// <param name="paragraphIndex">Paragraph index.</param> 
+        /// <param name="format">Export picture format.</param> 
+        /// <param name="scaleX">X scale ratio.</param> 
+        /// <param name="scaleY">Y scale ratio.</param> 
+        /// <param name="quality">Image quality (1 to 100); applies to JPEG only.</param> 
+        /// <param name="password">Document password.</param> 
+        /// <param name="folder">Document folder.</param> 
+        /// <param name="storage">Document storage.</param> 
+        /// <param name="fontsFolder">Fonts folder.</param> 
+        /// <returns><see cref="System.IO.Stream"/></returns>            
+        public System.IO.Stream DownloadTableCellParagraph(string name, int slideIndex, int shapeIndex, int rowIndex, int cellIndex, int paragraphIndex, ImageExportFormat format, double? scaleX = null, double? scaleY = null, int? quality = null, string password = null, string folder = null, string storage = null, string fontsFolder = null)
+        {
+            // verify the required parameter 'name' is set
+            if (name == null)
+            {
+                throw new ApiException(400, "Missing required parameter 'name' when calling DownloadTableCellParagraph");
+            }
+            // create path and map variables
+            string resourcePath = GetResourceUrl("/slides/{name}/slides/{slideIndex}/shapes/{shapeIndex}/rows/{rowIndex}/cells/{cellIndex}/paragraphs/{paragraphIndex}/{format}");
+            var headerParams = new Dictionary<string, string>();
+            resourcePath = UrlHelper.AddPathParameter(resourcePath, "name", name);
+            resourcePath = UrlHelper.AddPathParameter(resourcePath, "slideIndex", slideIndex);
+            resourcePath = UrlHelper.AddPathParameter(resourcePath, "shapeIndex", shapeIndex);
+            resourcePath = UrlHelper.AddPathParameter(resourcePath, "rowIndex", rowIndex);
+            resourcePath = UrlHelper.AddPathParameter(resourcePath, "cellIndex", cellIndex);
+            resourcePath = UrlHelper.AddPathParameter(resourcePath, "paragraphIndex", paragraphIndex);
+            resourcePath = UrlHelper.AddPathParameter(resourcePath, "format", format);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "scaleX", scaleX);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "scaleY", scaleY);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "quality", quality);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "folder", folder);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "storage", storage);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "fontsFolder", fontsFolder);
+            UrlHelper.AddHeaderParameter(headerParams, "password", password);
+            var requestFiles = new List<FileInfo>();
+            return InvokeBinaryApi(resourcePath, "POST", null, headerParams, requestFiles, "application/json");
         }
 
         /// <summary>
@@ -6212,6 +6306,61 @@ namespace Aspose.Slides.Cloud.Sdk
         }
 
         /// <summary>
+        /// Imports a chart from an Excel workbook and adds it to the slide. 
+        /// </summary>
+        /// <param name="name">Document name.</param> 
+        /// <param name="slideIndex">Slide index.</param> 
+        /// <param name="worksheetName">The name of the worksheet that contains the chart.</param> 
+        /// <param name="document">Excel workbook data.</param> 
+        /// <param name="chartName">The name of the chart. Required if chartIndex is not specified.</param> 
+        /// <param name="chartIndex">The zero-based index of the chart in the worksheet. Takes precedence over chartName.</param> 
+        /// <param name="x">X coordinate of the chart (EMU).</param> 
+        /// <param name="y">Y coordinate of the chart (EMU).</param> 
+        /// <param name="embedAllWorkbook">If true, the entire workbook is embedded; if false, only chart data.</param> 
+        /// <param name="workbookPath">Storage path to the workbook. If omitted, the workbook must be uploaded as multipart form data.</param> 
+        /// <param name="workbookStorage">Storage name for workbookPath.</param> 
+        /// <param name="password">Document password.</param> 
+        /// <param name="folder">Presentation folder.</param> 
+        /// <param name="storage">Presentation storage.</param> 
+        /// <returns><see cref="ShapeBase"/></returns>            
+        public ShapeBase ImportChartFromWorkbook(string name, int slideIndex, string worksheetName, System.IO.Stream document = null, string chartName = null, int? chartIndex = null, double? x = null, double? y = null, bool? embedAllWorkbook = null, string workbookPath = null, string workbookStorage = null, string password = null, string folder = null, string storage = null)
+        {
+            // verify the required parameter 'name' is set
+            if (name == null)
+            {
+                throw new ApiException(400, "Missing required parameter 'name' when calling ImportChartFromWorkbook");
+            }
+            // verify the required parameter 'worksheetName' is set
+            if (worksheetName == null)
+            {
+                throw new ApiException(400, "Missing required parameter 'worksheetName' when calling ImportChartFromWorkbook");
+            }
+            // create path and map variables
+            string resourcePath = GetResourceUrl("/slides/{name}/slides/{slideIndex}/shapes/fromExcelChart");
+            var headerParams = new Dictionary<string, string>();
+            var formParams = new Dictionary<string, object>();
+            resourcePath = UrlHelper.AddPathParameter(resourcePath, "name", name);
+            resourcePath = UrlHelper.AddPathParameter(resourcePath, "slideIndex", slideIndex);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "worksheetName", worksheetName);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "chartName", chartName);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "chartIndex", chartIndex);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "x", x);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "y", y);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "embedAllWorkbook", embedAllWorkbook);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "workbookPath", workbookPath);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "workbookStorage", workbookStorage);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "folder", folder);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "storage", storage);
+            UrlHelper.AddHeaderParameter(headerParams, "password", password);
+            var requestFiles = new List<FileInfo>();
+            if (document != null) 
+            {
+                requestFiles.Add(new FileInfo { Name = "document", Content = document });
+            }
+            return InvokeApi<ShapeBase>(resourcePath, "POST", null, headerParams, requestFiles, "application/json");
+        }
+
+        /// <summary>
         /// Create presentation document from html. 
         /// </summary>
         /// <param name="name">Document name.</param> 
@@ -6326,6 +6475,62 @@ namespace Aspose.Slides.Cloud.Sdk
                 requestFiles.Add(new FileInfo { Name = "image", Content = image });
             }
             return InvokeApi<Shapes>(resourcePath, "POST", null, headerParams, requestFiles, "application/json");
+        }
+
+        /// <summary>
+        /// Imports a table from an Excel workbook and adds it to the slide. 
+        /// </summary>
+        /// <param name="name">Document name.</param> 
+        /// <param name="slideIndex">Slide index.</param> 
+        /// <param name="worksheetName">The name of the worksheet that contains the table.</param> 
+        /// <param name="cellRange">The cell range that defines the table (e.g. \"A1:D10\").</param> 
+        /// <param name="document">Excel workbook data.</param> 
+        /// <param name="x">X coordinate of the table (EMU).</param> 
+        /// <param name="y">Y coordinate of the table (EMU).</param> 
+        /// <param name="workbookPath">Storage path to the workbook. If omitted, the workbook must be uploaded as multipart form data.</param> 
+        /// <param name="workbookStorage">Storage name for workbookPath.</param> 
+        /// <param name="password">Document password.</param> 
+        /// <param name="folder">Presentation folder.</param> 
+        /// <param name="storage">Presentation storage.</param> 
+        /// <returns><see cref="ShapeBase"/></returns>            
+        public ShapeBase ImportTableFromWorkbook(string name, int slideIndex, string worksheetName, string cellRange, System.IO.Stream document = null, double? x = null, double? y = null, string workbookPath = null, string workbookStorage = null, string password = null, string folder = null, string storage = null)
+        {
+            // verify the required parameter 'name' is set
+            if (name == null)
+            {
+                throw new ApiException(400, "Missing required parameter 'name' when calling ImportTableFromWorkbook");
+            }
+            // verify the required parameter 'worksheetName' is set
+            if (worksheetName == null)
+            {
+                throw new ApiException(400, "Missing required parameter 'worksheetName' when calling ImportTableFromWorkbook");
+            }
+            // verify the required parameter 'cellRange' is set
+            if (cellRange == null)
+            {
+                throw new ApiException(400, "Missing required parameter 'cellRange' when calling ImportTableFromWorkbook");
+            }
+            // create path and map variables
+            string resourcePath = GetResourceUrl("/slides/{name}/slides/{slideIndex}/shapes/fromExcelTable");
+            var headerParams = new Dictionary<string, string>();
+            var formParams = new Dictionary<string, object>();
+            resourcePath = UrlHelper.AddPathParameter(resourcePath, "name", name);
+            resourcePath = UrlHelper.AddPathParameter(resourcePath, "slideIndex", slideIndex);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "worksheetName", worksheetName);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "cellRange", cellRange);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "x", x);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "y", y);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "workbookPath", workbookPath);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "workbookStorage", workbookStorage);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "folder", folder);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "storage", storage);
+            UrlHelper.AddHeaderParameter(headerParams, "password", password);
+            var requestFiles = new List<FileInfo>();
+            if (document != null) 
+            {
+                requestFiles.Add(new FileInfo { Name = "document", Content = document });
+            }
+            return InvokeApi<ShapeBase>(resourcePath, "POST", null, headerParams, requestFiles, "application/json");
         }
 
         /// <summary>
@@ -7296,6 +7501,57 @@ namespace Aspose.Slides.Cloud.Sdk
         }
 
         /// <summary>
+        /// Render paragraph to specified picture format and save it to the storage. 
+        /// </summary>
+        /// <param name="name">Presentation name.</param> 
+        /// <param name="slideIndex">Slide index.</param> 
+        /// <param name="shapeIndex">Index of shape starting from 1</param> 
+        /// <param name="paragraphIndex">Paragraph index.</param> 
+        /// <param name="format">Export picture format.</param> 
+        /// <param name="outPath">Output path.</param> 
+        /// <param name="scaleX">X scale ratio.</param> 
+        /// <param name="scaleY">Y scale ratio.</param> 
+        /// <param name="quality">Image quality (1 to 100); applies to JPEG only.</param> 
+        /// <param name="password">Document password.</param> 
+        /// <param name="folder">Presentation folder.</param> 
+        /// <param name="storage">Presentation storage.</param> 
+        /// <param name="fontsFolder">Fonts folder.</param> 
+        /// <param name="subShape">Sub-shape path (e.g. \"3\", \"3/shapes/2).</param> 
+        /// <returns><see cref=""/></returns>            
+        public void SaveParagraph(string name, int slideIndex, int shapeIndex, int paragraphIndex, ImageExportFormat format, string outPath, double? scaleX = null, double? scaleY = null, int? quality = null, string password = null, string folder = null, string storage = null, string fontsFolder = null, string subShape = null)
+        {
+            // verify the required parameter 'name' is set
+            if (name == null)
+            {
+                throw new ApiException(400, "Missing required parameter 'name' when calling SaveParagraph");
+            }
+            // verify the required parameter 'outPath' is set
+            if (outPath == null)
+            {
+                throw new ApiException(400, "Missing required parameter 'outPath' when calling SaveParagraph");
+            }
+            // create path and map variables
+            string resourcePath = GetResourceUrl("/slides/{name}/slides/{slideIndex}/shapes/{shapeIndex}/paragraphs/{paragraphIndex}/{format}");
+            var headerParams = new Dictionary<string, string>();
+            resourcePath = UrlHelper.AddPathParameter(resourcePath, "name", name);
+            resourcePath = UrlHelper.AddPathParameter(resourcePath, "slideIndex", slideIndex);
+            resourcePath = UrlHelper.AddPathParameter(resourcePath, "shapeIndex", shapeIndex);
+            resourcePath = UrlHelper.AddPathParameter(resourcePath, "paragraphIndex", paragraphIndex);
+            resourcePath = UrlHelper.AddPathParameter(resourcePath, "format", format);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "outPath", outPath);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "scaleX", scaleX);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "scaleY", scaleY);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "quality", quality);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "folder", folder);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "storage", storage);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "fontsFolder", fontsFolder);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "subShape", subShape);
+            UrlHelper.AddHeaderParameter(headerParams, "password", password);
+            var requestFiles = new List<FileInfo>();
+            InvokeVoidApi(resourcePath, "PUT", null, headerParams, requestFiles, "application/json");
+        }
+
+        /// <summary>
         /// Save a presentation to a specified format. 
         /// </summary>
         /// <param name="name">Document name.</param> 
@@ -7581,6 +7837,59 @@ namespace Aspose.Slides.Cloud.Sdk
             var postBody = SerializationHelper.Serialize(options); // http body (model) parameter
             var requestFiles = new List<FileInfo>();
             InvokeVoidApi(resourcePath, "PUT", postBody, headerParams, requestFiles, "application/json");
+        }
+
+        /// <summary>
+        /// Render table cell paragraph to specified picture format and save it to the storage. 
+        /// </summary>
+        /// <param name="name">Document name.</param> 
+        /// <param name="slideIndex">Slide index.</param> 
+        /// <param name="shapeIndex">Shape index.</param> 
+        /// <param name="rowIndex">Row index.</param> 
+        /// <param name="cellIndex">Table cell index.</param> 
+        /// <param name="paragraphIndex">Paragraph index.</param> 
+        /// <param name="format">Export picture format.</param> 
+        /// <param name="outPath">Output path.</param> 
+        /// <param name="scaleX">X scale ratio.</param> 
+        /// <param name="scaleY">Y scale ratio.</param> 
+        /// <param name="quality">Image quality (1 to 100); applies to JPEG only.</param> 
+        /// <param name="password">Document password.</param> 
+        /// <param name="folder">Document folder.</param> 
+        /// <param name="storage">Document storage.</param> 
+        /// <param name="fontsFolder">Fonts folder.</param> 
+        /// <returns><see cref=""/></returns>            
+        public void SaveTableCellParagraph(string name, int slideIndex, int shapeIndex, int rowIndex, int cellIndex, int paragraphIndex, ImageExportFormat format, string outPath, double? scaleX = null, double? scaleY = null, int? quality = null, string password = null, string folder = null, string storage = null, string fontsFolder = null)
+        {
+            // verify the required parameter 'name' is set
+            if (name == null)
+            {
+                throw new ApiException(400, "Missing required parameter 'name' when calling SaveTableCellParagraph");
+            }
+            // verify the required parameter 'outPath' is set
+            if (outPath == null)
+            {
+                throw new ApiException(400, "Missing required parameter 'outPath' when calling SaveTableCellParagraph");
+            }
+            // create path and map variables
+            string resourcePath = GetResourceUrl("/slides/{name}/slides/{slideIndex}/shapes/{shapeIndex}/rows/{rowIndex}/cells/{cellIndex}/paragraphs/{paragraphIndex}/{format}");
+            var headerParams = new Dictionary<string, string>();
+            resourcePath = UrlHelper.AddPathParameter(resourcePath, "name", name);
+            resourcePath = UrlHelper.AddPathParameter(resourcePath, "slideIndex", slideIndex);
+            resourcePath = UrlHelper.AddPathParameter(resourcePath, "shapeIndex", shapeIndex);
+            resourcePath = UrlHelper.AddPathParameter(resourcePath, "rowIndex", rowIndex);
+            resourcePath = UrlHelper.AddPathParameter(resourcePath, "cellIndex", cellIndex);
+            resourcePath = UrlHelper.AddPathParameter(resourcePath, "paragraphIndex", paragraphIndex);
+            resourcePath = UrlHelper.AddPathParameter(resourcePath, "format", format);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "outPath", outPath);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "scaleX", scaleX);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "scaleY", scaleY);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "quality", quality);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "folder", folder);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "storage", storage);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "fontsFolder", fontsFolder);
+            UrlHelper.AddHeaderParameter(headerParams, "password", password);
+            var requestFiles = new List<FileInfo>();
+            InvokeVoidApi(resourcePath, "PUT", null, headerParams, requestFiles, "application/json");
         }
 
         /// <summary>

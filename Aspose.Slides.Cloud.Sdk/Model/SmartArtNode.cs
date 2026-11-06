@@ -103,6 +103,11 @@ namespace Aspose.Slides.Cloud.Sdk.Model
         /// </summary>
         public ResourceUri Paragraphs { get; set; }
 
+        /// <summary>
+        /// Default paragraph format for the node's text frame.
+        /// </summary>
+        public ParagraphFormat DefaultParagraphFormat { get; set; }
+
 
         /// <summary>
         /// Property values to determine the type when deserializing from Json
@@ -141,6 +146,7 @@ namespace Aspose.Slides.Cloud.Sdk.Model
             sb.Append("  Text: ").Append(this.Text).Append("\n");
             sb.Append("  OrgChartLayout: ").Append(this.OrgChartLayout).Append("\n");
             sb.Append("  Paragraphs: ").Append(this.Paragraphs).Append("\n");
+            sb.Append("  DefaultParagraphFormat: ").Append(this.DefaultParagraphFormat).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }

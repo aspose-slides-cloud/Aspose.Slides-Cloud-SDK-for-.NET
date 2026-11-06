@@ -24,6 +24,9 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System.Collections.Generic;
+#if !NETFRAMEWORK
+using Microsoft.Extensions.Logging;
+#endif
 
 namespace Aspose.Slides.Cloud.Sdk
 {
@@ -32,9 +35,12 @@ namespace Aspose.Slides.Cloud.Sdk
     /// </summary>
     public class Configuration
     {
+        private string _asyncApiBaseUrl;
+        private string _authBaseUrl;
+
         public Configuration()
         {
-            AuthBaseUrl = AsyncApiBaseUrl = ApiBaseUrl = "https://api.aspose.cloud";
+            ApiBaseUrl = "https://api.aspose.cloud";
             Version = "v3.0";
             DebugMode = false;
             CustomHeaders = new Dictionary<string, string>();
@@ -47,14 +53,22 @@ namespace Aspose.Slides.Cloud.Sdk
         public string ApiBaseUrl { get; set; }
 
         /// <summary>
-        /// Aspose Cloud API base URL.
+        /// Aspose Cloud Async API base URL. Defaults to ApiBaseUrl if not explicitly set.
         /// </summary>
-        public string AsyncApiBaseUrl { get; set; }
+        public string AsyncApiBaseUrl
+        {
+            get => _asyncApiBaseUrl ?? ApiBaseUrl;
+            set => _asyncApiBaseUrl = value;
+        }
 
         /// <summary>
-        /// Aspose Cloud Async API base URL.
+        /// Aspose Cloud Auth base URL. Defaults to ApiBaseUrl if not explicitly set.
         /// </summary>
-        public string AuthBaseUrl { get; set; }
+        public string AuthBaseUrl
+        {
+            get => _authBaseUrl ?? ApiBaseUrl;
+            set => _authBaseUrl = value;
+        }
 
         /// <summary>
         /// Aspose Cloud API version.
@@ -91,6 +105,14 @@ namespace Aspose.Slides.Cloud.Sdk
         /// Gets or sets a value indicating whether debug mode.
         /// </summary>
         public bool DebugMode { get; set; }
+
+#if !NETFRAMEWORK
+        /// <summary>
+        /// Gets or sets the logger factory used for debug output when DebugMode is true.
+        /// When not set, output goes to the console.
+        /// </summary>
+        public ILoggerFactory LoggerFactory { get; set; }
+#endif
 
         /// <summary>
         /// Custom HTTP request header keys and values

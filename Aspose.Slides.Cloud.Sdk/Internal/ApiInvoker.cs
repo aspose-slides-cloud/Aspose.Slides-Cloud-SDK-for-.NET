@@ -37,6 +37,8 @@ namespace Aspose.Slides.Cloud.Sdk
         public ApiInvoker(List<IRequestHandler> requestHandlers)
         {
             m_requestHandlers = requestHandlers;
+            // TLS 1.1 and 1.2 are not enabled by default on .NET Framework versions below 4.6
+            ServicePointManager.SecurityProtocol |= (SecurityProtocolType)768 | (SecurityProtocolType)3072;
         }
 
         public object InvokeApi(

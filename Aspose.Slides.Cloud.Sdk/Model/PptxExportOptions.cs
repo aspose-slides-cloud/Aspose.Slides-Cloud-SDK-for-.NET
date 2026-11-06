@@ -88,6 +88,65 @@ namespace Aspose.Slides.Cloud.Sdk.Model
         }
 
         /// <summary>
+        /// The compression level used when saving the presentation document. Higher compression levels produce smaller files but require more processing time. The actual compression ratio depends on the content of the presentation. The default value is CompressionLevel.Level6.
+        /// </summary>
+        /// <value>The compression level used when saving the presentation document. Higher compression levels produce smaller files but require more processing time. The actual compression ratio depends on the content of the presentation. The default value is CompressionLevel.Level6.</value>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum CompressionLevelEnum
+        {
+            
+            /// <summary>
+            /// Enum None for "None"
+            /// </summary>
+            None,
+            
+            /// <summary>
+            /// Enum Level1 for "Level1"
+            /// </summary>
+            Level1,
+            
+            /// <summary>
+            /// Enum Level2 for "Level2"
+            /// </summary>
+            Level2,
+            
+            /// <summary>
+            /// Enum Level3 for "Level3"
+            /// </summary>
+            Level3,
+            
+            /// <summary>
+            /// Enum Level4 for "Level4"
+            /// </summary>
+            Level4,
+            
+            /// <summary>
+            /// Enum Level5 for "Level5"
+            /// </summary>
+            Level5,
+            
+            /// <summary>
+            /// Enum Level6 for "Level6"
+            /// </summary>
+            Level6,
+            
+            /// <summary>
+            /// Enum Level7 for "Level7"
+            /// </summary>
+            Level7,
+            
+            /// <summary>
+            /// Enum Level8 for "Level8"
+            /// </summary>
+            Level8,
+            
+            /// <summary>
+            /// Enum Level9 for "Level9"
+            /// </summary>
+            Level9
+        }
+
+        /// <summary>
         /// The conformance class to which the PresentationML document conforms.
         /// </summary>
         public ConformanceEnum? Conformance { get; set; }
@@ -96,6 +155,11 @@ namespace Aspose.Slides.Cloud.Sdk.Model
         /// Specifies whether the ZIP64 format is used for the Presentation document. The default value is Zip64Mode.IfNecessary.
         /// </summary>
         public Zip64ModeEnum? Zip64Mode { get; set; }
+
+        /// <summary>
+        /// The compression level used when saving the presentation document. Higher compression levels produce smaller files but require more processing time. The actual compression ratio depends on the content of the presentation. The default value is CompressionLevel.Level6.
+        /// </summary>
+        public CompressionLevelEnum? CompressionLevel { get; set; }
 
         /// <summary>
         /// True to refresh the presentation thumbnail on save
@@ -145,6 +209,7 @@ namespace Aspose.Slides.Cloud.Sdk.Model
             sb.Append("  Format: ").Append(this.Format).Append("\n");
             sb.Append("  Conformance: ").Append(this.Conformance).Append("\n");
             sb.Append("  Zip64Mode: ").Append(this.Zip64Mode).Append("\n");
+            sb.Append("  CompressionLevel: ").Append(this.CompressionLevel).Append("\n");
             sb.Append("  RefreshThumbnail: ").Append(this.RefreshThumbnail).Append("\n");
             sb.Append("}\n");
             return sb.ToString();

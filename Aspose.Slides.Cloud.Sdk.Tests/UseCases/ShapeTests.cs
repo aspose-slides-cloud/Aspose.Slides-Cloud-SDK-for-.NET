@@ -808,6 +808,25 @@ namespace Aspose.Slides.Cloud.Sdk.Tests
                 subNodePath, c_password, c_folderName);
             Assert.AreEqual(3, response.Nodes[0].Nodes.Count);
         }
+
+        [Test]
+        public void SmartArtNodeDefaultParagraphFormat()
+        {
+            TestUtils.Upload(c_fileName, c_folderName + "/" + c_fileName);
+            int slideIndex = 7;
+            int smartArtIndex = 1;
+            SmartArt existing = TestUtils.SlidesApi.GetShape(c_fileName, slideIndex, smartArtIndex, c_password, c_folderName) as SmartArt;
+            Assert.IsNotNull(existing);
+            existing.Nodes[0].DefaultParagraphFormat = new ParagraphFormat
+            {
+                BulletFillFormat = new SolidFill { Color = "#FFFF0000" }
+            };
+            SmartArt updated = TestUtils.SlidesApi.UpdateShape(c_fileName, slideIndex, smartArtIndex, existing, c_password, c_folderName) as SmartArt;
+            Assert.IsNotNull(updated);
+            Assert.IsNotNull(updated.Nodes[0].DefaultParagraphFormat);
+            Assert.IsInstanceOf<SolidFill>(updated.Nodes[0].DefaultParagraphFormat.BulletFillFormat);
+            Assert.AreEqual("#FFFF0000", ((SolidFill)updated.Nodes[0].DefaultParagraphFormat.BulletFillFormat).Color);
+        }
         
         [Test]
         public void DownloadShapeFromDto()
@@ -823,6 +842,16 @@ namespace Aspose.Slides.Cloud.Sdk.Tests
             Assert.IsNotNull(stream);
             Assert.Greater(stream.Length, 0);
             Assert.IsTrue(stream.CanRead);
+        }
+
+        [Test]
+        public void ShapeCloneFromSlide()
+        {
+            TestUtils.Upload(c_fileName, c_folderName + "/" + c_fileName);
+            ShapeBase shape = TestUtils.SlidesApi.CreateShape(
+                c_fileName, c_slideIndex, shapeToClone: 1, cloneFromSlide: 1,
+                password: c_password, folder: c_folderName);
+            Assert.IsNotNull(shape);
         }
 
         const string c_svgFileName = "shapes.svg";

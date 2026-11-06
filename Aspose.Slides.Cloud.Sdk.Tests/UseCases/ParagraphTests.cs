@@ -23,6 +23,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 using System.Collections.Generic;
+using System.IO;
 using Aspose.Slides.Cloud.Sdk.Model;
 using Aspose.Slides.Cloud.Sdk.Tests.Utils;
 using NUnit.Framework;
@@ -290,6 +291,61 @@ namespace Aspose.Slides.Cloud.Sdk.Tests
             Paragraph response = TestUtils.SlidesApi.GetParagraphEffective(c_fileName, c_slideIndex, 3,
                 1, c_password, c_folderName, subShape: "1");
             Assert.AreEqual(72, response.DefaultTabSize);
+        }
+
+        [Test]
+        public void DownloadParagraph()
+        {
+            TestUtils.Upload(c_fileName, c_folderName + "/" + c_fileName);
+            Stream response = TestUtils.SlidesApi.DownloadParagraph(c_fileName, c_slideIndex, c_shapeIndex, 1,
+                ImageExportFormat.Png, password: c_password, folder: c_folderName);
+            Assert.IsNotNull(response);
+            Assert.Greater(response.Length, 0);
+            Assert.IsTrue(response.CanRead);
+        }
+
+        [Test]
+        public void DownloadSubShapeParagraph()
+        {
+            TestUtils.Upload(c_fileName, c_folderName + "/" + c_fileName);
+            Stream response = TestUtils.SlidesApi.DownloadParagraph(c_fileName, c_slideIndex, 3, 1,
+                ImageExportFormat.Png, password: c_password, folder: c_folderName, subShape: "1");
+            Assert.IsNotNull(response);
+            Assert.Greater(response.Length, 0);
+            Assert.IsTrue(response.CanRead);
+        }
+
+        [Test]
+        public void DownloadParagraphScaled()
+        {
+            TestUtils.Upload(c_fileName, c_folderName + "/" + c_fileName);
+            Stream response = TestUtils.SlidesApi.DownloadParagraph(c_fileName, c_slideIndex, c_shapeIndex, 1,
+                ImageExportFormat.Png, password: c_password, folder: c_folderName);
+            Stream scaledResponse = TestUtils.SlidesApi.DownloadParagraph(c_fileName, c_slideIndex, c_shapeIndex, 1,
+                ImageExportFormat.Png, 2, 2, password: c_password, folder: c_folderName);
+            Assert.Greater(scaledResponse.Length, response.Length);
+        }
+
+        [Test]
+        public void SaveParagraph()
+        {
+            const string outPath = c_folderName + "/paragraph.png";
+            TestUtils.Upload(c_fileName, c_folderName + "/" + c_fileName);
+            TestUtils.SlidesApi.SaveParagraph(c_fileName, c_slideIndex, c_shapeIndex, 1, ImageExportFormat.Png,
+                outPath, password: c_password, folder: c_folderName);
+            ObjectExist exists = TestUtils.SlidesApi.ObjectExists(outPath);
+            Assert.IsTrue(exists.Exists.Value);
+        }
+
+        [Test]
+        public void SaveSubShapeParagraph()
+        {
+            const string outPath = c_folderName + "/paragraph.png";
+            TestUtils.Upload(c_fileName, c_folderName + "/" + c_fileName);
+            TestUtils.SlidesApi.SaveParagraph(c_fileName, c_slideIndex, 3, 1, ImageExportFormat.Png,
+                outPath, password: c_password, folder: c_folderName, subShape: "1");
+            ObjectExist exists = TestUtils.SlidesApi.ObjectExists(outPath);
+            Assert.IsTrue(exists.Exists.Value);
         }
 
         const int c_slideIndex = 6;

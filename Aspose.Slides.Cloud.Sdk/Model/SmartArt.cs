@@ -1031,6 +1031,11 @@ namespace Aspose.Slides.Cloud.Sdk.Model
         /// </summary>
         public bool? IsReversed { get; set; }
 
+        /// <summary>
+        /// Default paragraph format applied to all nodes. Write-only: not populated on read since there is no corresponding property at the SmartArt shape level in Aspose.Slides.
+        /// </summary>
+        public ParagraphFormat DefaultParagraphFormat { get; set; }
+
 
         /// <summary>
         /// Property values to determine the type when deserializing from Json
@@ -1089,6 +1094,7 @@ namespace Aspose.Slides.Cloud.Sdk.Model
             sb.Append("  ColorStyle: ").Append(this.ColorStyle).Append("\n");
             sb.Append("  Nodes: ").Append(this.Nodes).Append("\n");
             sb.Append("  IsReversed: ").Append(this.IsReversed).Append("\n");
+            sb.Append("  DefaultParagraphFormat: ").Append(this.DefaultParagraphFormat).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }

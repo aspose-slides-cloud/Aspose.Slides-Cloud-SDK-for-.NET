@@ -24,6 +24,7 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System.Collections.Generic;
+using System.IO;
 using Aspose.Slides.Cloud.Sdk.Model;
 using Aspose.Slides.Cloud.Sdk.Tests.Utils;
 using NUnit.Framework;
@@ -312,7 +313,65 @@ namespace Aspose.Slides.Cloud.Sdk.Tests
             Assert.AreEqual(1, response.Items.Count);
         }
         
+        [Test]
+        public void ImportTableFromWorkbook()
+        {
+            TestUtils.Upload(c_fileName, c_folderName + "/" + c_fileName);
+            Stream file = File.OpenRead(Path.Combine(TestUtils.TestDataPath, c_workbookFileName));
+            ShapeBase shape = TestUtils.SlidesApi.ImportTableFromWorkbook(
+                c_fileName, c_slideIndex, c_worksheetName, c_cellRange, file,
+                password: c_password, folder: c_folderName);
+            Assert.IsNotNull(shape);
+            Assert.IsInstanceOf<Table>(shape);
+        }
+
+        [Test]
+        public void ImportTableFromWorkbookByPath()
+        {
+            TestUtils.Upload(c_fileName, c_folderName + "/" + c_fileName);
+            TestUtils.Upload(c_workbookFileName, c_folderName + "/" + c_workbookFileName);
+            ShapeBase shape = TestUtils.SlidesApi.ImportTableFromWorkbook(
+                c_fileName, c_slideIndex, c_worksheetName, c_cellRange,
+                workbookPath: c_folderName + "/" + c_workbookFileName,
+                password: c_password, folder: c_folderName);
+            Assert.IsNotNull(shape);
+            Assert.IsInstanceOf<Table>(shape);
+        }
+
+        [Test]
+        public void DownloadTableCellParagraph()
+        {
+            TestUtils.Upload(c_fileName, c_folderName + "/" + c_fileName);
+            int rowIndex = 1;
+            int cellIndex = 1;
+            int paragraphIndex = 1;
+            Stream response = TestUtils.SlidesApi.DownloadTableCellParagraph(c_fileName, c_slideIndex,
+                c_shapeIndex, rowIndex, cellIndex, paragraphIndex, ImageExportFormat.Png,
+                password: c_password, folder: c_folderName);
+            Assert.IsNotNull(response);
+            Assert.Greater(response.Length, 0);
+            Assert.IsTrue(response.CanRead);
+        }
+
+        [Test]
+        public void SaveTableCellParagraph()
+        {
+            const string outPath = c_folderName + "/tableCellParagraph.png";
+            TestUtils.Upload(c_fileName, c_folderName + "/" + c_fileName);
+            int rowIndex = 1;
+            int cellIndex = 1;
+            int paragraphIndex = 1;
+            TestUtils.SlidesApi.SaveTableCellParagraph(c_fileName, c_slideIndex, c_shapeIndex, rowIndex,
+                cellIndex, paragraphIndex, ImageExportFormat.Png, outPath, password: c_password,
+                folder: c_folderName);
+            ObjectExist exists = TestUtils.SlidesApi.ObjectExists(outPath);
+            Assert.IsTrue(exists.Exists.Value);
+        }
+
         private const int c_slideIndex = 9;
         private const int c_shapeIndex = 1;
+        private const string c_workbookFileName = "oleObject.xlsx";
+        private const string c_worksheetName = "Sheet1";
+        private const string c_cellRange = "A1:B5";
     }
 }

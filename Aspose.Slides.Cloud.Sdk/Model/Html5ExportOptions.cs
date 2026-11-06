@@ -40,6 +40,50 @@ namespace Aspose.Slides.Cloud.Sdk.Model
     public class Html5ExportOptions : ExportOptions 
     {                       
         /// <summary>
+        /// Represents the pictures compression level. Pictures are not compressed (DocumentResolution) by default. Not applied when TemplatesPath is set.
+        /// </summary>
+        /// <value>Represents the pictures compression level. Pictures are not compressed (DocumentResolution) by default. Not applied when TemplatesPath is set.</value>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum PicturesCompressionEnum
+        {
+            
+            /// <summary>
+            /// Enum Dpi330 for "Dpi330"
+            /// </summary>
+            Dpi330,
+            
+            /// <summary>
+            /// Enum Dpi220 for "Dpi220"
+            /// </summary>
+            Dpi220,
+            
+            /// <summary>
+            /// Enum Dpi150 for "Dpi150"
+            /// </summary>
+            Dpi150,
+            
+            /// <summary>
+            /// Enum Dpi96 for "Dpi96"
+            /// </summary>
+            Dpi96,
+            
+            /// <summary>
+            /// Enum Dpi72 for "Dpi72"
+            /// </summary>
+            Dpi72,
+            
+            /// <summary>
+            /// Enum DocumentResolution for "DocumentResolution"
+            /// </summary>
+            DocumentResolution
+        }
+
+        /// <summary>
+        /// Represents the pictures compression level. Pictures are not compressed (DocumentResolution) by default. Not applied when TemplatesPath is set.
+        /// </summary>
+        public PicturesCompressionEnum? PicturesCompression { get; set; }
+
+        /// <summary>
         /// Gets or sets transitions animation option.
         /// </summary>
         public bool? AnimateTransitions { get; set; }
@@ -116,6 +160,7 @@ namespace Aspose.Slides.Cloud.Sdk.Model
             sb.Append("  SlidesLayoutOptions: ").Append(this.SlidesLayoutOptions).Append("\n");
             sb.Append("  TemplatesPath: ").Append(this.TemplatesPath).Append("\n");
             sb.Append("  DisableFontLigatures: ").Append(this.DisableFontLigatures).Append("\n");
+            sb.Append("  PicturesCompression: ").Append(this.PicturesCompression).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
